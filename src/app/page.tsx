@@ -23,7 +23,7 @@ export default function Home() {
         <ParallaxBackground>
           <main>
             <TravelHero />
-            <div className="relative bg-black/60 backdrop-blur-sm">
+            <div className="relative bg-black/70">
               <Features />
               <HowItWorks />
               <Destinations />

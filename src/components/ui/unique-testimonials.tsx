@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import { TextReveal, BlurIn } from "@/components/ui/animations"
 
 const testimonials = [
     {
@@ -72,11 +73,13 @@ export function UniqueTestimonials() {
             <div className="container mx-auto px-6">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                        What Travelers Say
+                        <TextReveal text="What Travelers Say" />
                     </h2>
-                    <p className="text-xl text-white/60">
-                        Join thousands of happy adventurers
-                    </p>
+                    <BlurIn delay={0.3}>
+                        <p className="text-xl text-white/60">
+                            Join thousands of happy adventurers
+                        </p>
+                    </BlurIn>
                 </div>
 
                 <div className="flex flex-col items-center gap-10 py-8">

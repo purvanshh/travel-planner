@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 import ExpandCards from '@/components/ui/expand-cards';
-import { TextReveal, BlurIn, SlideIn, Floating } from '@/components/ui/animations';
+import { TextReveal, BlurIn, SlideIn, Floating, FadeUp, ScaleUp, StaggerContainer, StaggerItem } from '@/components/ui/animations';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 
 // Features Section
@@ -68,23 +68,18 @@ export function Features() {
                     </BlurIn>
                 </div>
 
-                <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+                <StaggerContainer className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {features.map((feature, index) => (
-                        <motion.div
+                        <StaggerItem
                             key={feature.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.03, y: -8 }}
-                            transition={{ duration: 0.3 }}
-                            viewport={{ once: true }}
                             className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer transition-colors'
                         >
                             <div className='text-primary mb-4'>{feature.icon}</div>
                             <h3 className='text-xl font-semibold text-foreground mb-2'>{feature.title}</h3>
                             <p className='text-muted-foreground'>{feature.description}</p>
-                        </motion.div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     );
@@ -124,23 +119,18 @@ export function HowItWorks() {
                     </BlurIn>
                 </div>
 
-                <div className='grid md:grid-cols-3 gap-12'>
+                <StaggerContainer className='grid md:grid-cols-3 gap-12'>
                     {steps.map((step, index) => (
-                        <motion.div
+                        <StaggerItem
                             key={step.step}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            transition={{ duration: 0.3 }}
-                            viewport={{ once: true }}
                             className='text-center cursor-pointer p-6 rounded-2xl hover:bg-white/[0.03] transition-colors'
                         >
                             <div className='text-6xl font-bold text-primary/20 mb-4'>{step.step}</div>
                             <h3 className='text-2xl font-semibold text-foreground mb-2'>{step.title}</h3>
                             <p className='text-muted-foreground'>{step.description}</p>
-                        </motion.div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     );
@@ -181,12 +171,7 @@ export function ItineraryPreview() {
         <section className='py-24'>
             <div className='container mx-auto px-6'>
                 <div className='grid lg:grid-cols-2 gap-12 items-center'>
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                    >
+                    <SlideIn direction="left">
                         <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-6'>
                             Your Perfect Itinerary, Visualized
                         </h2>
@@ -202,15 +187,9 @@ export function ItineraryPreview() {
                                 </li>
                             ))}
                         </ul>
-                    </motion.div>
+                    </SlideIn>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                        className='relative'
-                    >
+                    <SlideIn direction="right" className='relative'>
                         <div className='aspect-video rounded-2xl bg-card border border-border p-6'>
                             <div className='space-y-4'>
                                 {['Day 1: Arrival & City Tour', 'Day 2: Cultural Exploration', 'Day 3: Adventure Activities'].map((day, i) => (
@@ -223,7 +202,7 @@ export function ItineraryPreview() {
                                 ))}
                             </div>
                         </div>
-                    </motion.div>
+                    </SlideIn>
                 </div>
             </div>
         </section>
@@ -275,15 +254,10 @@ export function Pricing() {
                     </BlurIn>
                 </div>
 
-                <div className='grid md:grid-cols-3 gap-8 max-w-5xl mx-auto'>
+                <StaggerContainer className='grid md:grid-cols-3 gap-8 max-w-5xl mx-auto'>
                     {plans.map((plan, index) => (
-                        <motion.div
+                        <StaggerItem
                             key={plan.name}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.03, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            viewport={{ once: true }}
                             className={`p-8 rounded-2xl cursor-pointer ${plan.popular
                                 ? 'bg-primary text-primary-foreground border-2 border-primary shadow-xl shadow-primary/20'
                                 : 'bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10'
@@ -317,9 +291,9 @@ export function Pricing() {
                                     : 'bg-primary border-primary/50'
                                     }`}
                             />
-                        </motion.div>
+                        </StaggerItem>
                     ))}
-                </div>
+                </StaggerContainer>
             </div>
         </section>
     );
@@ -330,13 +304,7 @@ export function CTA() {
     return (
         <section id="contact" className='py-24'>
             <div className='container mx-auto px-6'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className='text-center max-w-3xl mx-auto'
-                >
+                <FadeUp className='text-center max-w-3xl mx-auto'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-6'>
                         Ready to Start Your Adventure?
                     </h2>
@@ -344,16 +312,16 @@ export function CTA() {
                         Join over 50,000 travelers who plan smarter with TravelPlanner.
                     </p>
                     <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                        <InteractiveHoverButton 
-                            text="Get Started" 
+                        <InteractiveHoverButton
+                            text="Get Started"
                             className="w-40 py-4 bg-primary border-primary/50"
                         />
-                        <InteractiveHoverButton 
-                            text="Watch Demo" 
+                        <InteractiveHoverButton
+                            text="Watch Demo"
                             className="w-40 py-4 bg-white/5 border-white/20"
                         />
                     </div>
-                </motion.div>
+                </FadeUp>
             </div>
         </section>
     );
