@@ -76,9 +76,10 @@ export function Features() {
                             key={feature.title}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            whileHover={{ scale: 1.03, y: -8 }}
+                            transition={{ duration: 0.3 }}
                             viewport={{ once: true }}
-                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 transition-colors'
+                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer transition-colors'
                         >
                             <div className='text-primary mb-4'>{feature.icon}</div>
                             <h3 className='text-xl font-semibold text-foreground mb-2'>{feature.title}</h3>
@@ -135,9 +136,10 @@ export function HowItWorks() {
                             key={step.step}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            transition={{ duration: 0.3 }}
                             viewport={{ once: true }}
-                            className='text-center'
+                            className='text-center cursor-pointer p-6 rounded-2xl hover:bg-white/[0.03] transition-colors'
                         >
                             <div className='text-6xl font-bold text-primary/20 mb-4'>{step.step}</div>
                             <h3 className='text-2xl font-semibold text-foreground mb-2'>{step.title}</h3>
@@ -285,9 +287,10 @@ export function Testimonials() {
                             key={testimonial.name}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            whileHover={{ scale: 1.03, y: -8 }}
+                            transition={{ duration: 0.3 }}
                             viewport={{ once: true }}
-                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08]'
+                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer'
                         >
                             <p className='text-muted-foreground mb-6'>&ldquo;{testimonial.content}&rdquo;</p>
                             <div className='flex items-center gap-4'>
@@ -360,11 +363,12 @@ export function Pricing() {
                             key={plan.name}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            whileHover={{ scale: 1.03, y: -10 }}
+                            transition={{ duration: 0.3 }}
                             viewport={{ once: true }}
-                            className={`p-8 rounded-2xl ${plan.popular
-                                ? 'bg-primary text-primary-foreground border-2 border-primary'
-                                : 'bg-card border border-border'
+                            className={`p-8 rounded-2xl cursor-pointer ${plan.popular
+                                ? 'bg-primary text-primary-foreground border-2 border-primary shadow-xl shadow-primary/20'
+                                : 'bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10'
                                 }`}
                         >
                             {plan.popular && (
@@ -388,14 +392,16 @@ export function Pricing() {
                                     </li>
                                 ))}
                             </ul>
-                            <button
-                                className={`w-full mt-8 py-3 rounded-xl font-medium transition-opacity hover:opacity-90 ${plan.popular
-                                    ? 'bg-primary-foreground text-primary'
-                                    : 'bg-primary text-primary-foreground'
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`w-full mt-8 py-3 rounded-xl font-medium transition-all ${plan.popular
+                                    ? 'bg-primary-foreground text-primary hover:shadow-lg'
+                                    : 'bg-primary text-primary-foreground hover:shadow-lg hover:shadow-primary/25'
                                     }`}
                             >
                                 {plan.cta}
-                            </button>
+                            </motion.button>
                         </motion.div>
                     ))}
                 </div>
@@ -423,12 +429,20 @@ export function CTA() {
                         Join over 50,000 travelers who plan smarter with TravelPlanner.
                     </p>
                     <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                        <button className='px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:opacity-90 transition-opacity'>
+                        <motion.button
+                            whileHover={{ scale: 1.05, y: -3 }}
+                            whileTap={{ scale: 0.98 }}
+                            className='px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow'
+                        >
                             Get Started Free
-                        </button>
-                        <button className='px-8 py-4 bg-secondary text-secondary-foreground rounded-xl font-semibold border border-border hover:bg-accent transition-colors'>
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05, y: -3 }}
+                            whileTap={{ scale: 0.98 }}
+                            className='px-8 py-4 bg-white/5 text-white rounded-xl font-semibold border border-white/20 hover:bg-white/10 transition-colors'
+                        >
                             Watch Demo
-                        </button>
+                        </motion.button>
                     </div>
                 </motion.div>
             </div>

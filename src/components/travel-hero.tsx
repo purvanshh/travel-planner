@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero';
 import { Map, Sparkles, Smartphone } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const travelContent = {
     mediaSrc: '/hero-video.mp4',
@@ -23,38 +24,58 @@ const TravelHeroContent = () => {
             </p>
 
             <div className='grid md:grid-cols-3 gap-6 mb-12'>
-                <div className='p-6 rounded-xl bg-card border border-border'>
+                <motion.div
+                    whileHover={{ scale: 1.03, y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className='p-6 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.1] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer'
+                >
                     <div className='text-primary mb-4'><Map className='w-8 h-8' /></div>
                     <h3 className='text-xl font-semibold mb-2 text-foreground'>Smart Itineraries</h3>
                     <p className='text-muted-foreground'>
                         AI-powered trip planning that adapts to your style and preferences.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className='p-6 rounded-xl bg-card border border-border'>
+                <motion.div
+                    whileHover={{ scale: 1.03, y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className='p-6 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.1] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer'
+                >
                     <div className='text-primary mb-4'><Sparkles className='w-8 h-8' /></div>
                     <h3 className='text-xl font-semibold mb-2 text-foreground'>Local Insights</h3>
                     <p className='text-muted-foreground'>
                         Discover hidden gems and authentic experiences recommended by locals.
                     </p>
-                </div>
+                </motion.div>
 
-                <div className='p-6 rounded-xl bg-card border border-border'>
+                <motion.div
+                    whileHover={{ scale: 1.03, y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className='p-6 rounded-xl bg-white/[0.05] backdrop-blur-sm border border-white/[0.1] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer'
+                >
                     <div className='text-primary mb-4'><Smartphone className='w-8 h-8' /></div>
                     <h3 className='text-xl font-semibold mb-2 text-foreground'>Seamless Travel</h3>
                     <p className='text-muted-foreground'>
                         Access your plans offline and get real-time updates on the go.
                     </p>
-                </div>
+                </motion.div>
             </div>
 
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                <button className='px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:opacity-90 transition-opacity'>
+                <motion.button
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileTap={{ scale: 0.98 }}
+                    className='px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow'
+                >
                     Start Planning
-                </button>
-                <button className='px-8 py-4 bg-secondary text-secondary-foreground rounded-xl font-semibold border border-border hover:bg-accent transition-colors'>
+                </motion.button>
+                <motion.button
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileTap={{ scale: 0.98 }}
+                    className='px-8 py-4 bg-white/5 text-white rounded-xl font-semibold border border-white/20 hover:bg-white/10 transition-colors'
+                >
                     View Destinations
-                </button>
+                </motion.button>
             </div>
         </div>
     );
