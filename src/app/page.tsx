@@ -22,8 +22,8 @@ export default function Home() {
       <LoadingScreen duration={2000}>
         <ParallaxBackground>
           <main>
-            <TravelHero />
             <div className="relative bg-black/70">
+            <TravelHero />
               <Features />
               <HowItWorks />
               <Destinations />
