@@ -8,7 +8,7 @@ import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button
 
 const travelContent = {
     mediaSrc: '/hero-video.mp4',
-    background: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1920&auto=format&fit=crop',
+    background: '/image.png',
     title: 'Discover Your Next Adventure',
 };
 
