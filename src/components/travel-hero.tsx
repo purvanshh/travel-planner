@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero';
 import { Map, Sparkles, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 
 const travelContent = {
     mediaSrc: '/hero-video.mp4',
@@ -62,20 +63,14 @@ const TravelHeroContent = () => {
             </div>
 
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                <motion.button
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    whileTap={{ scale: 0.98 }}
-                    className='px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow'
-                >
-                    Start Planning
-                </motion.button>
-                <motion.button
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    whileTap={{ scale: 0.98 }}
-                    className='px-8 py-4 bg-white/5 text-white rounded-xl font-semibold border border-white/20 hover:bg-white/10 transition-colors'
-                >
-                    View Destinations
-                </motion.button>
+                <InteractiveHoverButton 
+                    text="Start Planning" 
+                    className="w-44 py-4 bg-primary border-primary/50"
+                />
+                <InteractiveHoverButton 
+                    text="Destinations" 
+                    className="w-44 py-4 bg-white/5 border-white/20"
+                />
             </div>
         </div>
     );
@@ -87,7 +82,7 @@ export default function TravelHero() {
     }, []);
 
     return (
-        <div className='min-h-screen'>
+        <div id="home" className='min-h-screen'>
             <ScrollExpandMedia
                 mediaType='video'
                 mediaSrc={travelContent.mediaSrc}

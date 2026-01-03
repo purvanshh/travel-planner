@@ -17,6 +17,7 @@ import {
 import { ReactNode } from 'react';
 import ExpandCards from '@/components/ui/expand-cards';
 import { TextReveal, BlurIn, SlideIn, Floating } from '@/components/ui/animations';
+import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 
 // Features Section
 export function Features() {
@@ -89,7 +90,7 @@ export function Features() {
     );
 }
 
-// How It Works Section
+// How It Works Section -> Explore
 export function HowItWorks() {
     const steps = [
         {
@@ -110,7 +111,7 @@ export function HowItWorks() {
     ];
 
     return (
-        <section className='py-24'>
+        <section id="explore" className='py-24'>
             <div className='container mx-auto px-6'>
                 <div className='text-center mb-16'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
@@ -229,70 +230,6 @@ export function ItineraryPreview() {
     );
 }
 
-// Testimonials Section
-export function Testimonials() {
-    const testimonials: { name: string; role: string; content: string; avatar: ReactNode }[] = [
-        {
-            name: 'Sarah Johnson',
-            role: 'Adventure Traveler',
-            content: 'TravelPlanner made my solo trip to Japan absolutely seamless. The AI suggestions were spot on!',
-            avatar: <User className='w-6 h-6' />,
-        },
-        {
-            name: 'Mike Chen',
-            role: 'Family Vacationer',
-            content: 'Planning a trip with kids used to be stressful. Now it takes minutes instead of hours.',
-            avatar: <Users className='w-6 h-6' />,
-        },
-        {
-            name: 'Emma Williams',
-            role: 'Digital Nomad',
-            content: 'The offline access feature is a game changer. Perfect for remote destinations.',
-            avatar: <Briefcase className='w-6 h-6' />,
-        },
-    ];
-
-    return (
-        <section className='py-24'>
-            <div className='container mx-auto px-6'>
-                <div className='text-center mb-16'>
-                    <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
-                        <TextReveal text="Loved by Travelers" />
-                    </h2>
-                    <BlurIn delay={0.3}>
-                        <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                            Join thousands of happy adventurers.
-                        </p>
-                    </BlurIn>
-                </div>
-
-                <div className='grid md:grid-cols-3 gap-8'>
-                    {testimonials.map((testimonial, index) => (
-                        <motion.div
-                            key={testimonial.name}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.03, y: -8 }}
-                            transition={{ duration: 0.3 }}
-                            viewport={{ once: true }}
-                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer'
-                        >
-                            <p className='text-muted-foreground mb-6'>&ldquo;{testimonial.content}&rdquo;</p>
-                            <div className='flex items-center gap-4'>
-                                <div className='w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary'>{testimonial.avatar}</div>
-                                <div>
-                                    <p className='font-semibold text-foreground'>{testimonial.name}</p>
-                                    <p className='text-sm text-muted-foreground'>{testimonial.role}</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
 // Pricing Section
 export function Pricing() {
     const plans = [
@@ -373,16 +310,13 @@ export function Pricing() {
                                     </li>
                                 ))}
                             </ul>
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className={`w-full mt-8 py-3 rounded-xl font-medium transition-all ${plan.popular
-                                    ? 'bg-primary-foreground text-primary hover:shadow-lg'
-                                    : 'bg-primary text-primary-foreground hover:shadow-lg hover:shadow-primary/25'
+                            <InteractiveHoverButton
+                                text={plan.cta}
+                                className={`w-full mt-8 py-3 ${plan.popular
+                                    ? 'bg-primary-foreground text-primary border-primary-foreground/50'
+                                    : 'bg-primary border-primary/50'
                                     }`}
-                            >
-                                {plan.cta}
-                            </motion.button>
+                            />
                         </motion.div>
                     ))}
                 </div>
@@ -410,20 +344,14 @@ export function CTA() {
                         Join over 50,000 travelers who plan smarter with TravelPlanner.
                     </p>
                     <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                        <motion.button
-                            whileHover={{ scale: 1.05, y: -3 }}
-                            whileTap={{ scale: 0.98 }}
-                            className='px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow'
-                        >
-                            Get Started Free
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.05, y: -3 }}
-                            whileTap={{ scale: 0.98 }}
-                            className='px-8 py-4 bg-white/5 text-white rounded-xl font-semibold border border-white/20 hover:bg-white/10 transition-colors'
-                        >
-                            Watch Demo
-                        </motion.button>
+                        <InteractiveHoverButton 
+                            text="Get Started" 
+                            className="w-40 py-4 bg-primary border-primary/50"
+                        />
+                        <InteractiveHoverButton 
+                            text="Watch Demo" 
+                            className="w-40 py-4 bg-white/5 border-white/20"
+                        />
                     </div>
                 </motion.div>
             </div>

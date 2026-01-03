@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plane, Menu, X } from 'lucide-react';
@@ -8,9 +8,10 @@ import { Plane, Menu, X } from 'lucide-react';
 const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'Features', href: '#features', id: 'features' },
+    { name: 'Explore', href: '#explore', id: 'explore' },
     { name: 'Destinations', href: '#destinations', id: 'destinations' },
+    { name: 'Testimonials', href: '#testimonials', id: 'testimonials' },
     { name: 'Pricing', href: '#pricing', id: 'pricing' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 export default function Navbar() {
@@ -18,32 +19,59 @@ export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+    const handleScroll = useCallback(() => {
+        setIsScrolled(window.scrollY > 50);
 
-            // Determine active section based on scroll position
-            const sections = navLinks.map(link => link.id);
-            const scrollPosition = window.scrollY + 150;
+        // Use a smaller offset for more accurate section detection
+        const scrollPosition = window.scrollY + 150;
 
-            for (let i = sections.length - 1; i >= 0; i--) {
-                const section = document.getElementById(sections[i]);
-                if (section && section.offsetTop <= scrollPosition) {
-                    setActiveSection(sections[i]);
+        // Find the current section by checking which section's top is closest to scroll position
+        const sections = navLinks.map(link => link.id);
+        let currentSection = 'home';
+
+        for (const sectionId of sections) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    currentSection = sectionId;
                     break;
                 }
             }
+        }
 
-            // If at top, set home as active
-            if (window.scrollY < 100) {
-                setActiveSection('home');
-            }
-        };
+        // If at very top, set home as active
+        if (window.scrollY < 100) {
+            currentSection = 'home';
+        }
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Initial check
-        return () => window.removeEventListener('scroll', handleScroll);
+        setActiveSection(currentSection);
     }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
+
+    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+        e.preventDefault();
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const navbarHeight = 80;
+            const targetPosition = section.offsetTop - navbarHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            
+            setActiveSection(sectionId);
+            setIsMobileMenuOpen(false);
+        }
+    };
 
     return (
         <motion.nav
@@ -76,12 +104,13 @@ export default function Navbar() {
                     {/* Desktop Navigation */}
                     <div className='hidden md:flex items-center gap-1'>
                         {navLinks.map((link) => (
-                            <Link
+                            <a
                                 key={link.name}
                                 href={link.href}
-                                className={`relative px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 ${activeSection === link.id
-                                        ? 'text-white'
-                                        : 'text-white/60 hover:text-white'
+                                onClick={(e) => scrollToSection(e, link.id)}
+                                className={`relative px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 cursor-pointer ${activeSection === link.id
+                                    ? 'text-white'
+                                    : 'text-white/60 hover:text-white'
                                     }`}
                             >
                                 {activeSection === link.id && (
@@ -92,7 +121,7 @@ export default function Navbar() {
                                     />
                                 )}
                                 <span className="relative z-10">{link.name}</span>
-                            </Link>
+                            </a>
                         ))}
                     </div>
 
@@ -133,17 +162,17 @@ export default function Navbar() {
                         >
                             <div className='flex flex-col gap-2'>
                                 {navLinks.map((link) => (
-                                    <Link
+                                    <a
                                         key={link.name}
                                         href={link.href}
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 ${activeSection === link.id
-                                                ? 'bg-white/10 text-white border border-white/20'
-                                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                                        onClick={(e) => scrollToSection(e, link.id)}
+                                        className={`px-4 py-3 rounded-xl font-medium transition-all duration-300 cursor-pointer ${activeSection === link.id
+                                            ? 'bg-white/10 text-white border border-white/20'
+                                            : 'text-white/60 hover:text-white hover:bg-white/5'
                                             }`}
                                     >
                                         {link.name}
-                                    </Link>
+                                    </a>
                                 ))}
                                 <motion.button
                                     whileTap={{ scale: 0.98 }}
