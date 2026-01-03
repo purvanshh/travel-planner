@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 import ExpandCards from '@/components/ui/expand-cards';
+import { TextReveal, BlurIn, SlideIn, Floating } from '@/components/ui/animations';
 
 // Features Section
 export function Features() {
@@ -55,20 +56,16 @@ export function Features() {
     return (
         <section id="features" className='py-24'>
             <div className='container mx-auto px-6'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className='text-center mb-16'
-                >
+                <div className='text-center mb-16'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
-                        Everything You Need
+                        <TextReveal text="Everything You Need" />
                     </h2>
-                    <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                        Plan, book, and explore with powerful features designed for modern travelers.
-                    </p>
-                </motion.div>
+                    <BlurIn delay={0.3}>
+                        <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+                            Plan, book, and explore with powerful features designed for modern travelers.
+                        </p>
+                    </BlurIn>
+                </div>
 
                 <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {features.map((feature, index) => (
@@ -115,20 +112,16 @@ export function HowItWorks() {
     return (
         <section className='py-24'>
             <div className='container mx-auto px-6'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className='text-center mb-16'
-                >
+                <div className='text-center mb-16'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
-                        How It Works
+                        <TextReveal text="How It Works" />
                     </h2>
-                    <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                        Three simple steps to your perfect trip.
-                    </p>
-                </motion.div>
+                    <BlurIn delay={0.3}>
+                        <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+                            Three simple steps to your perfect trip.
+                        </p>
+                    </BlurIn>
+                </div>
 
                 <div className='grid md:grid-cols-3 gap-12'>
                     {steps.map((step, index) => (
@@ -157,20 +150,16 @@ export function Destinations() {
     return (
         <section id="destinations" className='py-24'>
             <div className='container mx-auto px-6'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className='text-center mb-12'
-                >
+                <div className='text-center mb-12'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
-                        Popular Destinations
+                        <TextReveal text="Popular Destinations" />
                     </h2>
-                    <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                        Hover to explore our most loved travel destinations.
-                    </p>
-                </motion.div>
+                    <BlurIn delay={0.3}>
+                        <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+                            Hover to explore our most loved travel destinations.
+                        </p>
+                    </BlurIn>
+                </div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -266,20 +255,16 @@ export function Testimonials() {
     return (
         <section className='py-24'>
             <div className='container mx-auto px-6'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className='text-center mb-16'
-                >
+                <div className='text-center mb-16'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
-                        Loved by Travelers
+                        <TextReveal text="Loved by Travelers" />
                     </h2>
-                    <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                        Join thousands of happy adventurers.
-                    </p>
-                </motion.div>
+                    <BlurIn delay={0.3}>
+                        <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+                            Join thousands of happy adventurers.
+                        </p>
+                    </BlurIn>
+                </div>
 
                 <div className='grid md:grid-cols-3 gap-8'>
                     {testimonials.map((testimonial, index) => (
@@ -342,20 +327,16 @@ export function Pricing() {
     return (
         <section id="pricing" className='py-24'>
             <div className='container mx-auto px-6'>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className='text-center mb-16'
-                >
+                <div className='text-center mb-16'>
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
-                        Simple Pricing
+                        <TextReveal text="Simple Pricing" />
                     </h2>
-                    <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                        Choose the plan that fits your travel style.
-                    </p>
-                </motion.div>
+                    <BlurIn delay={0.3}>
+                        <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+                            Choose the plan that fits your travel style.
+                        </p>
+                    </BlurIn>
+                </div>
 
                 <div className='grid md:grid-cols-3 gap-8 max-w-5xl mx-auto'>
                     {plans.map((plan, index) => (
