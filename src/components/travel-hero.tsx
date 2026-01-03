@@ -13,11 +13,11 @@ const travelContent = {
 
 const TravelHeroContent = () => {
     return (
-        <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl md:text-4xl font-bold mb-6 text-foreground'>
+        <div className='max-w-4xl mx-auto text-center'>
+            <h2 className='text-3xl md:text-4xl font-bold mb-6 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]'>
                 Plan Your Perfect Journey
             </h2>
-            <p className='text-lg md:text-xl mb-8 text-muted-foreground leading-relaxed'>
+            <p className='text-lg md:text-xl mb-8 text-white/90 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]'>
                 Whether you&apos;re dreaming of pristine beaches, ancient cities, or mountain peaks,
                 our travel planner helps you craft unforgettable experiences. From itinerary
                 creation to local recommendations, we&apos;ve got you covered.
