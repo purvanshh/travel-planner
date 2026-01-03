@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import {
     Map,
     Sparkles,
@@ -16,6 +15,7 @@ import {
     Briefcase
 } from 'lucide-react';
 import { ReactNode } from 'react';
+import ExpandCards from '@/components/ui/expand-cards';
 
 // Features Section
 export function Features() {
@@ -53,7 +53,7 @@ export function Features() {
     ];
 
     return (
-        <section id="features" className='py-24 bg-background'>
+        <section id="features" className='py-24'>
             <div className='container mx-auto px-6'>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -78,7 +78,7 @@ export function Features() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className='p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-colors'
+                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 transition-colors'
                         >
                             <div className='text-primary mb-4'>{feature.icon}</div>
                             <h3 className='text-xl font-semibold text-foreground mb-2'>{feature.title}</h3>
@@ -112,7 +112,7 @@ export function HowItWorks() {
     ];
 
     return (
-        <section className='py-24 bg-muted/30'>
+        <section className='py-24'>
             <div className='container mx-auto px-6'>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -152,73 +152,32 @@ export function HowItWorks() {
 
 // Destinations Section
 export function Destinations() {
-    const destinations = [
-        {
-            name: 'Santorini, Greece',
-            image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=600&auto=format&fit=crop',
-            price: 'From $1,299',
-        },
-        {
-            name: 'Kyoto, Japan',
-            image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=600&auto=format&fit=crop',
-            price: 'From $1,599',
-        },
-        {
-            name: 'Bali, Indonesia',
-            image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=600&auto=format&fit=crop',
-            price: 'From $899',
-        },
-        {
-            name: 'Swiss Alps',
-            image: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=600&auto=format&fit=crop',
-            price: 'From $1,899',
-        },
-    ];
-
     return (
-        <section id="destinations" className='py-24 bg-background'>
+        <section id="destinations" className='py-24'>
             <div className='container mx-auto px-6'>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className='text-center mb-16'
+                    className='text-center mb-12'
                 >
                     <h2 className='text-4xl md:text-5xl font-bold text-foreground mb-4'>
                         Popular Destinations
                     </h2>
                     <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-                        Explore our most loved travel destinations.
+                        Hover to explore our most loved travel destinations.
                     </p>
                 </motion.div>
 
-                <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-6'>
-                    {destinations.map((dest, index) => (
-                        <motion.div
-                            key={dest.name}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            className='group relative rounded-2xl overflow-hidden cursor-pointer'
-                        >
-                            <div className='aspect-[3/4] relative'>
-                                <Image
-                                    src={dest.image}
-                                    alt={dest.name}
-                                    fill
-                                    className='object-cover group-hover:scale-110 transition-transform duration-500'
-                                />
-                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent' />
-                                <div className='absolute bottom-0 left-0 right-0 p-6'>
-                                    <h3 className='text-xl font-semibold text-white mb-1'>{dest.name}</h3>
-                                    <p className='text-blue-200'>{dest.price}</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    viewport={{ once: true }}
+                >
+                    <ExpandCards />
+                </motion.div>
             </div>
         </section>
     );
@@ -227,7 +186,7 @@ export function Destinations() {
 // Itinerary Preview Section
 export function ItineraryPreview() {
     return (
-        <section className='py-24 bg-muted/30'>
+        <section className='py-24'>
             <div className='container mx-auto px-6'>
                 <div className='grid lg:grid-cols-2 gap-12 items-center'>
                     <motion.div
@@ -303,7 +262,7 @@ export function Testimonials() {
     ];
 
     return (
-        <section className='py-24 bg-background'>
+        <section className='py-24'>
             <div className='container mx-auto px-6'>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -328,7 +287,7 @@ export function Testimonials() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className='p-8 rounded-2xl bg-card border border-border'
+                            className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08]'
                         >
                             <p className='text-muted-foreground mb-6'>&ldquo;{testimonial.content}&rdquo;</p>
                             <div className='flex items-center gap-4'>
@@ -378,7 +337,7 @@ export function Pricing() {
     ];
 
     return (
-        <section id="pricing" className='py-24 bg-muted/30'>
+        <section id="pricing" className='py-24'>
             <div className='container mx-auto px-6'>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -448,7 +407,7 @@ export function Pricing() {
 // CTA Section
 export function CTA() {
     return (
-        <section id="contact" className='py-24 bg-background'>
+        <section id="contact" className='py-24'>
             <div className='container mx-auto px-6'>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

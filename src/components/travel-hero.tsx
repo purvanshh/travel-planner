@@ -2,13 +2,12 @@
 
 import { useEffect } from 'react';
 import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero';
+import { Map, Sparkles, Smartphone } from 'lucide-react';
 
 const travelContent = {
     mediaSrc: '/hero-video.mp4',
     background: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1920&auto=format&fit=crop',
     title: 'Discover Your Next Adventure',
-    date: 'Travel Planner 2026',
-    scrollToExpand: '↓ Scroll to Explore',
 };
 
 const TravelHeroContent = () => {
@@ -25,7 +24,7 @@ const TravelHeroContent = () => {
 
             <div className='grid md:grid-cols-3 gap-6 mb-12'>
                 <div className='p-6 rounded-xl bg-card border border-border'>
-                    <div className='text-4xl mb-4'>🗺️</div>
+                    <div className='text-primary mb-4'><Map className='w-8 h-8' /></div>
                     <h3 className='text-xl font-semibold mb-2 text-foreground'>Smart Itineraries</h3>
                     <p className='text-muted-foreground'>
                         AI-powered trip planning that adapts to your style and preferences.
@@ -33,7 +32,7 @@ const TravelHeroContent = () => {
                 </div>
 
                 <div className='p-6 rounded-xl bg-card border border-border'>
-                    <div className='text-4xl mb-4'>✨</div>
+                    <div className='text-primary mb-4'><Sparkles className='w-8 h-8' /></div>
                     <h3 className='text-xl font-semibold mb-2 text-foreground'>Local Insights</h3>
                     <p className='text-muted-foreground'>
                         Discover hidden gems and authentic experiences recommended by locals.
@@ -41,7 +40,7 @@ const TravelHeroContent = () => {
                 </div>
 
                 <div className='p-6 rounded-xl bg-card border border-border'>
-                    <div className='text-4xl mb-4'>📱</div>
+                    <div className='text-primary mb-4'><Smartphone className='w-8 h-8' /></div>
                     <h3 className='text-xl font-semibold mb-2 text-foreground'>Seamless Travel</h3>
                     <p className='text-muted-foreground'>
                         Access your plans offline and get real-time updates on the go.
@@ -73,8 +72,6 @@ export default function TravelHero() {
                 mediaSrc={travelContent.mediaSrc}
                 bgImageSrc={travelContent.background}
                 title={travelContent.title}
-                date={travelContent.date}
-                scrollToExpand={travelContent.scrollToExpand}
                 textBlend
             >
                 <TravelHeroContent />

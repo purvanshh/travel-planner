@@ -1,5 +1,6 @@
 import TravelHero from "@/components/travel-hero";
 import Navbar from "@/components/navbar";
+import ParallaxBackground from "@/components/ui/parallax-background";
 import {
   Features,
   HowItWorks,
@@ -13,17 +14,21 @@ import {
 
 export default function Home() {
   return (
-    <main>
-      <Navbar />
-      <TravelHero />
-      <Features />
-      <HowItWorks />
-      <Destinations />
-      <ItineraryPreview />
-      <Testimonials />
-      <Pricing />
-      <CTA />
-      <Footer />
-    </main>
+    <ParallaxBackground>
+      <main>
+        <Navbar />
+        <TravelHero />
+        <div className="relative bg-black/60 backdrop-blur-sm">
+          <Features />
+          <HowItWorks />
+          <Destinations />
+          <ItineraryPreview />
+          <Testimonials />
+          <Pricing />
+          <CTA />
+        </div>
+        <Footer />
+      </main>
+    </ParallaxBackground>
   );
 }
