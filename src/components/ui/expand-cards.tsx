@@ -67,53 +67,73 @@ const ExpandCards = ({ items = destinations }: ExpandCardsProps) => {
 
     return (
         <div className="w-full py-8">
-            <div className="flex w-full items-center justify-center gap-2">
+            <div className="flex flex-col md:flex-row w-full items-center justify-center gap-2">
                 {items.map((dest, idx) => (
                     <div
                         key={idx}
-                        className="relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-in-out group"
+                        className="relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-in-out group w-full md:w-auto h-[10rem] md:h-[22rem]"
                         style={{
-                            width: getCardWidth(idx),
-                            height: "22rem",
+                            // Only apply dynamic width on desktop (md and up)
+                            // On mobile, we let it be full width (w-full) or fixed height
                         }}
-                        onMouseEnter={() => setExpandedIndex(idx)}
                     >
-                        <img
-                            className="w-full h-full object-cover"
-                            src={dest.image}
-                            alt={dest.name}
-                        />
-                        {/* Gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                        {/* Content - only visible when expanded */}
+                        {/* Desktop conditional styling using a style tag or class logic is tricky with inline styles mixed with tailwind. 
+                            Let's use a class logic approach more strictly or media query style. 
+                            The 'style' prop overrides classes. We need to apply width style ONLY on desktop.
+                        */}
+                        <style jsx>{`
+                            @media (min-width: 768px) {
+                                .card-${idx} {
+                                    width: ${getCardWidth(idx)};
+                                }
+                            }
+                        `}</style>
                         <div
-                            className={`absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-500 ${idx === expandedIndex ? 'opacity-100' : 'opacity-0'
-                                }`}
+                            className={`card-${idx} absolute inset-0 md:relative w-full h-full`}
+                            onMouseEnter={() => setExpandedIndex(idx)}
                         >
-                            <div className="flex items-center gap-1 text-blue-300 text-sm mb-1">
-                                <MapPin className="w-3 h-3" />
-                                <span>{dest.country}</span>
-                            </div>
-                            <h3 className="text-white text-xl font-bold mb-1">{dest.name}</h3>
-                            <p className="text-blue-200 text-sm font-medium">{dest.price}</p>
-                        </div>
+                            <img
+                                className="w-full h-full object-cover"
+                                src={dest.image}
+                                alt={dest.name}
+                            />
+                            {/* Gradient overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                        {/* Vertical text for collapsed cards */}
-                        <div
-                            className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${idx === expandedIndex ? 'opacity-0' : 'opacity-100'
-                                }`}
-                        >
-                            <span
-                                className="text-white font-bold text-sm whitespace-nowrap"
-                                style={{
-                                    writingMode: 'vertical-rl',
-                                    textOrientation: 'mixed',
-                                    transform: 'rotate(180deg)'
-                                }}
+                            {/* Content - only visible when expanded */}
+                            <div
+                                className={`absolute bottom-0 left-0 right-0 p-4 transition-opacity duration-500 ${idx === expandedIndex ? 'opacity-100' : 'opacity-0'
+                                    }`}
                             >
-                                {dest.name}
-                            </span>
+                                <div className="flex items-center gap-1 text-blue-300 text-sm mb-1">
+                                    <MapPin className="w-3 h-3" />
+                                    <span>{dest.country}</span>
+                                </div>
+                                <h3 className="text-white text-xl font-bold mb-1">{dest.name}</h3>
+                                <p className="text-blue-200 text-sm font-medium">{dest.price}</p>
+                            </div>
+
+                            {/* Vertical text for collapsed cards (Desktop only) */}
+                            <div
+                                className={`hidden md:flex absolute inset-0 items-center justify-center transition-opacity duration-500 ${idx === expandedIndex ? 'opacity-0' : 'opacity-100'
+                                    }`}
+                            >
+                                <span
+                                    className="text-white font-bold text-sm whitespace-nowrap"
+                                    style={{
+                                        writingMode: 'vertical-rl',
+                                        textOrientation: 'mixed',
+                                        transform: 'rotate(180deg)'
+                                    }}
+                                >
+                                    {dest.name}
+                                </span>
+                            </div>
+
+                            {/* Mobile Click Handler to expand (though vertical stack usually shows all or accordion, here we just show all consistently or keeping accordion behavior on mobile too?)
+                                For simplicity and best mobile UX with this specific component style, usually stacking them with a fixed height and expanding the active one vertically is nice.
+                                Let's try to implement vertical accordion on mobile.
+                            */}
                         </div>
                     </div>
                 ))}

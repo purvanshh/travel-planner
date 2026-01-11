@@ -34,7 +34,7 @@ export default function Navbar() {
             if (section) {
                 const sectionTop = section.offsetTop;
                 const sectionBottom = sectionTop + section.offsetHeight;
-                
+
                 if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                     currentSection = sectionId;
                     break;
@@ -52,7 +52,8 @@ export default function Navbar() {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
+        // Run once on mount to set initial state
+        requestAnimationFrame(() => handleScroll());
         return () => window.removeEventListener('scroll', handleScroll);
     }, [handleScroll]);
 
@@ -62,12 +63,12 @@ export default function Navbar() {
         if (section) {
             const navbarHeight = 80;
             const targetPosition = section.offsetTop - navbarHeight;
-            
+
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
-            
+
             setActiveSection(sectionId);
             setIsMobileMenuOpen(false);
         }

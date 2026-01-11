@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 
 interface ParallaxLayer {
@@ -259,23 +259,8 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const layerRefs = useRef<(HTMLImageElement | null)[]>([]);
 
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            const newXValue = e.clientX - window.innerWidth / 2;
-            const newYValue = e.clientY - window.innerHeight / 2;
-            const newRotateDegree = (newXValue / (window.innerWidth / 2)) * 20;
 
-            updateLayers(e.clientX, newXValue, newYValue, newRotateDegree);
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [layers]);
-
-    const updateLayers = (
+    const updateLayers = useCallback((
         cursorPosition: number,
         xVal: number,
         yVal: number,
@@ -297,7 +282,23 @@ const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({
                 }px) rotateY(${rotateDeg * rotation}deg) translateX(calc(-50% + ${-xVal * speedX
                 }px)) translateY(calc(-50% + ${yVal * speedY}px))`;
         });
-    };
+    }, [layers]);
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            const newXValue = e.clientX - window.innerWidth / 2;
+            const newYValue = e.clientY - window.innerHeight / 2;
+            const newRotateDegree = (newXValue / (window.innerWidth / 2)) * 20;
+
+            updateLayers(e.clientX, newXValue, newYValue, newRotateDegree);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        };
+    }, [layers, updateLayers]);
 
     return (
         <div

@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { TextReveal, BlurIn } from "@/components/ui/animations"
@@ -85,9 +87,7 @@ export function UniqueTestimonials() {
                 <div className="flex flex-col items-center gap-10 py-8">
                     {/* Quote Container */}
                     <div className="relative px-8 max-w-2xl mx-auto">
-                        <span className="absolute -left-4 -top-6 text-8xl font-serif text-white/[0.08] select-none pointer-events-none">
-                            "
-                        </span>
+                        &quot;
 
                         <p
                             className={cn(
@@ -99,7 +99,7 @@ export function UniqueTestimonials() {
                         </p>
 
                         <span className="absolute -right-4 -bottom-8 text-8xl font-serif text-white/[0.08] select-none pointer-events-none">
-                            "
+                            &quot;
                         </span>
                     </div>
 
@@ -135,11 +135,13 @@ export function UniqueTestimonials() {
                                     >
                                         {/* Avatar with smooth ring animation */}
                                         <div className="relative flex-shrink-0">
-                                            <img
+                                            <Image
                                                 src={testimonial.avatar}
                                                 alt={testimonial.author}
+                                                width={40}
+                                                height={40}
                                                 className={cn(
-                                                    "w-10 h-10 rounded-full object-cover",
+                                                    "rounded-full object-cover",
                                                     "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
                                                     isActive ? "ring-2 ring-primary/50" : "ring-2 ring-white/20",
                                                     !isActive && "hover:scale-110",

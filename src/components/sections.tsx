@@ -10,13 +10,10 @@ import {
     Shield,
     Plane,
     Check,
-    User,
-    Users,
-    Briefcase
 } from 'lucide-react';
 import { ReactNode } from 'react';
 import ExpandCards from '@/components/ui/expand-cards';
-import { TextReveal, BlurIn, SlideIn, Floating, FadeUp, ScaleUp, StaggerContainer, StaggerItem } from '@/components/ui/animations';
+import { TextReveal, BlurIn, SlideIn, FadeUp, StaggerContainer, StaggerItem } from '@/components/ui/animations';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 
 // Features Section
@@ -69,7 +66,7 @@ export function Features() {
                 </div>
 
                 <StaggerContainer className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                    {features.map((feature, index) => (
+                    {features.map((feature) => (
                         <StaggerItem
                             key={feature.title}
                             className='p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 cursor-pointer transition-colors'
@@ -120,7 +117,7 @@ export function HowItWorks() {
                 </div>
 
                 <StaggerContainer className='grid md:grid-cols-3 gap-12'>
-                    {steps.map((step, index) => (
+                    {steps.map((step) => (
                         <StaggerItem
                             key={step.step}
                             className='text-center cursor-pointer p-6 rounded-2xl hover:bg-white/[0.03] transition-colors'
@@ -255,7 +252,7 @@ export function Pricing() {
                 </div>
 
                 <StaggerContainer className='grid md:grid-cols-3 gap-8 max-w-5xl mx-auto'>
-                    {plans.map((plan, index) => (
+                    {plans.map((plan) => (
                         <StaggerItem
                             key={plan.name}
                             className={`p-8 rounded-2xl cursor-pointer ${plan.popular
